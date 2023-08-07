@@ -1,15 +1,16 @@
 from http import HTTPStatus
 from flask import Blueprint
 from src.models import DbMovie, MovieSchema
+from src.database import db
 movies_bp = Blueprint('movies_bp', __name__, url_prefix='/movies')
 
 @movies_bp.route('/', methods=['GET'])
 def get():
-    from src.app import db
     try:
-        moviesSchema = MovieSchema()
         movies = db.session.execute(db.Select(DbMovie)).scalars()
-        data = moviesSchema.dump(movies)
+        moviesSchema = MovieSchema()
+        data = moviesSchema.dump(movies, many=True)
         return data, HTTPStatus.OK
-    except:
+    except Exception as err:
+        print("Error: ", err, flush=True)
         return [], HTTPStatus.INTERNAL_SERVER_ERROR

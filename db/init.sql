@@ -1,11 +1,11 @@
-CREATE DATABASE MovieDatabase;
+CREATE DATABASE movie_database;
 
-\c MovieDatabase postgres;
+\c movie_database postgres;
 
-CREATE TABLE IF NOT EXISTS Movies (
+CREATE TABLE IF NOT EXISTS movies (
     id INT NOT NULL,
     title VARCHAR(50) NOT NULL
 );
 
-INSERT INTO Movies
+INSERT INTO movies
 VALUES (1, 'Test Movie');

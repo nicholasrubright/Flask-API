@@ -1,2 +1,3 @@
 FROM postgres:15.3-alpine
-ADD init.sql /docker-entrypoint-initdb.d
+COPY ./init.sql /docker-entrypoint-initdb.d/init.sql
+CMD ["docker-entrypoint.sh", "postgres"]

@@ -8,6 +8,7 @@ def create_app(name: str) -> Flask:
     app = Flask(name)
     app.config.from_object(Config)
     app.url_map.strict_slashes = False
+    app.debug = True
     
     db.init_app(app)
     ma.init_app(app)
