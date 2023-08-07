@@ -1,14 +1,16 @@
-from marshmallow_generic import GenericSchema, fields, pre_load
+from src.database import db, ma
 
 class Movie:
     def __init__(self, id: int, title: str):
         self.id = id
         self.title = title
-        
-class MovieSchema(GenericSchema[Movie]):
-    id = fields.Int()
-    title = fields.Str()
+
+class DbMovie(db.Model):
+    __tablename__ = 'Movies'
     
-    @pre_load
-    def make_object(self, data, **kwargs):
-        return Movie(data["id"], data["title"]).__dict__
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.Text)
+    
+class MovieSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = DbMovie

@@ -1,1 +1,1 @@
-from src.models.movie import Movie, MovieSchema
+from src.models.movie import Movie, DbMovie, MovieSchema
