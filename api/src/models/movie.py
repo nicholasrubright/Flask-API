@@ -1,16 +1,16 @@
-from src.database import db, ma
+from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy import Column, Integer, Text
+from flask_marshmallow.sqla import SQLAlchemyAutoSchema
 
-# class Movie:
-#     def __init__(self, id: int, title: str):
-#         self.id = id
-#         self.title = title
+class Base(DeclarativeBase):
+    pass
 
-class DbMovie(db.Model):
+class DbMovie(Base):
     __tablename__ = 'movies'
     
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.Text)
+    id = Column(Integer, primary_key=True)
+    title = Column(Text)
     
-class MovieSchema(ma.SQLAlchemyAutoSchema):
+class MovieSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = DbMovie
