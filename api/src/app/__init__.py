@@ -10,11 +10,13 @@ class AppModule(Module):
     def __init__(self, app):
         self.app = app
     
+    @provider
+    @singleton
+    def provide_SQLAlchemy(self) -> SQLAlchemy:
+        return SQLAlchemy(self.app)
+    
     def configure(self, binder):
-        db = SQLAlchemy(self.app)
-        binder.bind(SQLAlchemy, to=db, scope=singleton)
-        
-        movieRepository = MovieRepository(db)
+        movieRepository = MovieRepository(self.provide_SQLAlchemy())
         binder.bind(MovieRepository, to=movieRepository, scope=singleton)
 
 
