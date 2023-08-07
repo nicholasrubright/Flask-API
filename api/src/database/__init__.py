@@ -12,7 +12,7 @@ class Model:
     _DatabaseSchema = None
     _Schema = None
 
-    AdditionalKeys = {'DatabaseModel', 'DatabaseSchema', '_Schema'}
+    AdditionalKeys = {'_DatabaseModel', '_DatabaseSchema', '_Schema'}
 
     def __init__(self, dbModel: Type[Base] | None = None, dbSchema: Type[SQLAlchemyAutoSchema] | None = None, schema: Type[Schema] | None = None):
         self._DatabaseModel = dbModel
