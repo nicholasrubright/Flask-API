@@ -1,6 +1,6 @@
 from src.models.movie import Movie
 class MovieService:
-    movieSchema = Movie.Schema()
+    movieSchema = Movie._Schema()
 
     def getMovies(self):
         test_1 = Movie(1, "test title")
