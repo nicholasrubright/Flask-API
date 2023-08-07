@@ -4,14 +4,18 @@ from config import Config
 from injector import Module, Injector, singleton, provider
 from flask_sqlalchemy import SQLAlchemy
 from flask_injector import FlaskInjector
+from src.repository.movie import MovieRepository
 
 class AppModule(Module):
     def __init__(self, app):
         self.app = app
-            
+    
     def configure(self, binder):
         db = SQLAlchemy(self.app)
         binder.bind(SQLAlchemy, to=db, scope=singleton)
+        
+        movieRepository = MovieRepository(db)
+        binder.bind(MovieRepository, to=movieRepository, scope=singleton)
 
 
 def create_app(name: str) -> Flask:
