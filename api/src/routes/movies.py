@@ -1,11 +1,11 @@
 from http import HTTPStatus
 from flask import Blueprint
 from src.models import DbMovie, MovieSchema
-from src.database import db
+from flask_sqlalchemy import SQLAlchemy
 movies_bp = Blueprint('movies_bp', __name__, url_prefix='/movies')
 
 @movies_bp.route('/', methods=['GET'])
-def get():
+def get(db: SQLAlchemy):
     try:
         movies = db.session.execute(db.Select(DbMovie)).scalars()
         moviesSchema = MovieSchema()
